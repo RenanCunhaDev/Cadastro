@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f9;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      color: white;
+      background-color: #5cb85c;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4cae4c;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Seção de Cadastro -->
+    <div id="cadastro" class="section">
+      <h1>Cadastro</h1>
+      <form id="cadastroForm">
+        <input type="text" id="nome" placeholder="Nome" required>
+        <input type="text" id="sobrenome" placeholder="Sobrenome" required>
+        <input type="tel" id="telefone" placeholder="Telefone" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+
+    <!-- Seção de Confirmação -->
+    <div id="confirmacao" class="section hidden">
+      <h1>Confirmação de Código</h1>
+      <form id="confirmacaoForm">
+        <input type="text" id="codigo" placeholder="Digite o código" required>
+        <button type="submit">Confirmar</button>
+      </form>
+    </div>
+
+    <!-- Seção de Finalização -->
+    <div id="finalizado" class="section hidden">
+      <h1>Cadastro Finalizado!</h1>
+      <p>Parabéns, seu cadastro foi concluído com sucesso!</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cadastroSection = document.getElementById("cadastro");
+      const confirmacaoSection = document.getElementById("confirmacao");
+      const finalizadoSection = document.getElementById("finalizado");
+
+      const cadastroForm = document.getElementById("cadastroForm");
+      const confirmacaoForm = document.getElementById("confirmacaoForm");
+
+      // Código fixo para simulação
+      const codigoSimulado = "123456";
+
+      // Cadastro -> Confirmação
+      cadastroForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Código enviado para o e-mail! Use '123456' para confirmar.");
+        cadastroSection.classList.add("hidden");
+        confirmacaoSection.classList.remove("hidden");
+      });
+
+      // Confirmação -> Finalizado
+      confirmacaoForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const codigo = document.getElementById("codigo").value;
+
+        if (codigo === codigoSimulado) {
+          confirmacaoSection.classList.add("hidden");
+          finalizadoSection.classList.remove("hidden");
+        } else {
+          alert("Código inválido. Tente novamente.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
